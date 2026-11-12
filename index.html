@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lê Anh Khoa - Actor Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: '#171717',
+                        darker: '#111111',
+                        cardbg: '#1e1e1e',
+                        mutedgray: '#aaaaaa',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.2em',
+                        mega: '.3em',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #171717;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555555;
+        }
+        .cinematic-shadow {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-charcoal text-white antialiased selection:bg-white selection:text-black">
+
+    <!-- NAVIGATION -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-charcoal/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand / Home Link -->
+            <a href="#hero" class="text-lg md:text-xl font-bold tracking-widest uppercase hover:text-mutedgray transition-colors" data-i18n="nav_home">
+                TRANG CHỦ
+            </a>
+
+            <!-- Desktop Nav Links & Language Switcher -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <nav class="flex items-center space-x-8 text-xs font-medium tracking-widest uppercase text-mutedgray">
+                    <a href="#about" class="hover:text-white transition-colors" data-i18n="nav_about">Giới thiệu</a>
+                    <a href="#photos" class="hover:text-white transition-colors" data-i18n="nav_photos">Ảnh</a>
+                    <a href="#showreel" class="hover:text-white transition-colors" data-i18n="nav_showreel">Showreel</a>
+                    <a href="#selftape" class="hover:text-white transition-colors" data-i18n="nav_selftape">Self-Tape</a>
+                    <a href="#skills" class="hover:text-white transition-colors" data-i18n="nav_skills">Kỹ năng</a>
+                    <a href="#experience" class="hover:text-white transition-colors" data-i18n="nav_experience">Dự án</a>
+                    <a href="#contact" class="hover:text-white transition-colors" data-i18n="nav_contact">Liên hệ</a>
+                </nav>
+
+                <!-- Language Dropdown Switcher with Flags & Arrow -->
+                <div class="relative pl-4 border-l border-white/10">
+                    <button type="button" onclick="toggleLangDropdown()" id="lang-dropdown-btn" class="flex items-center space-x-2 px-3 py-1.5 rounded bg-cardbg border border-white/10 text-xs font-semibold tracking-wider text-white hover:bg-white/10 transition-all focus:outline-none cursor-pointer">
+                        <span id="current-flag" class="text-base leading-none">🇻🇳</span>
+                        <span id="current-lang-text">VI</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-mutedgray transition-transform duration-200" id="lang-arrow"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="lang-menu" class="hidden absolute right-0 mt-2 w-38 bg-cardbg border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
+                        <button type="button" onclick="changeLanguage('vi')" class="w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center space-x-3 hover:bg-white/10 transition-colors text-white cursor-pointer">
+                            <span class="text-base leading-none">🇻🇳</span>
+                            <span>Tiếng Việt</span>
+                        </button>
+                        <button type="button" onclick="changeLanguage('en')" class="w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center space-x-3 hover:bg-white/10 transition-colors text-white border-t border-white/5 cursor-pointer">
+                            <span class="text-base leading-none">🇬🇧</span>
+                            <span>English</span>
+                        </button>
+                        <button type="button" onclick="changeLanguage('ko')" class="w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center space-x-3 hover:bg-white/10 transition-colors text-white border-t border-white/5 cursor-pointer">
+                            <span class="text-base leading-none">🇰🇷</span>
+                            <span>한국어</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Right Controls -->
+            <div class="flex items-center space-x-4 lg:hidden">
+                <!-- Mobile Language Dropdown -->
+                <div class="relative">
+                    <button type="button" onclick="toggleMobileLangDropdown()" id="m-lang-dropdown-btn" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded bg-cardbg border border-white/10 text-xs font-semibold text-white cursor-pointer">
+                        <span id="m-current-flag" class="text-sm leading-none">🇻🇳</span>
+                        <span id="m-current-lang-text">VI</span>
+                        <i class="fa-solid fa-chevron-down text-[9px] text-mutedgray transition-transform duration-200" id="m-lang-arrow"></i>
+                    </button>
+                    <div id="m-lang-menu" class="hidden absolute right-0 mt-2 w-36 bg-cardbg border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
+                        <button type="button" onclick="changeLanguage('vi')" class="w-full text-left px-3.5 py-2 text-xs font-semibold flex items-center space-x-2.5 hover:bg-white/10 text-white cursor-pointer">
+                            <span class="text-sm leading-none">🇻🇳</span>
+                            <span>Tiếng Việt</span>
+                        </button>
+                        <button type="button" onclick="changeLanguage('en')" class="w-full text-left px-3.5 py-2 text-xs font-semibold flex items-center space-x-2.5 hover:bg-white/10 text-white border-t border-white/5 cursor-pointer">
+                            <span class="text-sm leading-none">🇬🇧</span>
+                            <span>English</span>
+                        </button>
+                        <button type="button" onclick="changeLanguage('ko')" class="w-full text-left px-3.5 py-2 text-xs font-semibold flex items-center space-x-2.5 hover:bg-white/10 text-white border-t border-white/5 cursor-pointer">
+                            <span class="text-sm leading-none">🇰🇷</span>
+                            <span>한국어</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" aria-label="Toggle Menu" class="text-white focus:outline-none p-2 cursor-pointer">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-20 left-0 w-full bg-darker border-b border-white/10 px-6 py-6 transition-all shadow-2xl">
+            <nav class="flex flex-col space-y-4 text-sm font-medium tracking-widest uppercase text-mutedgray">
+                <a href="#about" class="mobile-link hover:text-white py-2 border-b border-white/5" data-i18n="nav_about">Giới thiệu</a>
+                <a href="#photos" class="mobile-link hover:text-white py-2 border-b border-white/5" data-i18n="nav_photos">Ảnh</a>
+                <a href="#showreel" class="mobile-link hover:text-white py-2 border-b border-white/5" data-i18n="nav_showreel">Showreel</a>
+                <a href="#selftape" class="mobile-link hover:text-white py-2 border-b border-white/5" data-i18n="nav_selftape">Self-Tape</a>
+                <a href="#skills" class="mobile-link hover:text-white py-2 border-b border-white/5" data-i18n="nav_skills">Kỹ năng</a>
+                <a href="#experience" class="mobile-link hover:text-white py-2 border-b border-white/5" data-i18n="nav_experience">Dự án</a>
+                <a href="#contact" class="mobile-link hover:text-white py-2" data-i18n="nav_contact">Liên hệ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-30">
+            <img src="https://placehold.co/1920x1080/171717/333333?text=L%C3%AA+Anh+Khoa" alt="Cinematic Background" class="w-full h-full object-cover blur-sm" onerror="this.src='https://placehold.co/1920x1080/171717/333333?text=Lê+Anh+Khoa'">
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/80 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-16">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-block px-3 py-1 bg-white/10 text-mutedgray text-xs tracking-mega uppercase rounded-full border border-white/10" data-i18n="hero_badge">
+                    Hồ sơ Năng Lực Diễn Viên
+                </div>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-wider uppercase leading-tight">
+                    LÊ ANH KHOA
+                </h1>
+                <p class="text-mutedgray text-sm md:text-base tracking-widest uppercase" data-i18n="hero_subtitle">
+                    DIỄN VIÊN · VIỆT NAM
+                </p>
+                <p class="text-white/80 text-lg md:text-xl font-light italic max-w-xl mx-auto lg:mx-0" data-i18n="hero_tagline">
+                    "Khám phá nhân vật. Kể chuyện."
+                </p>
+                <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                    <a href="#showreel" class="px-8 py-3.5 bg-white text-black text-xs font-semibold tracking-widest uppercase rounded hover:bg-mutedgray transition-all shadow-lg" data-i18n="hero_btn_showreel">
+                        Xem Showreel
+                    </a>
+                    <a href="#contact" class="px-8 py-3.5 border border-white/30 text-white text-xs font-semibold tracking-widest uppercase rounded hover:bg-white/10 transition-all" data-i18n="hero_btn_contact">
+                        Liên hệ ngay
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Portrait Frame -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-72 sm:w-80 lg:w-full max-w-sm aspect-[3/4] rounded-lg overflow-hidden border border-white/20 cinematic-shadow group bg-cardbg">
+                    <img src="https://lh3.googleusercontent.com/d/1Igbgf1C_6bxsTouLPY0krDLVlrtAuoNQ" alt="Lê Anh Khoa Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x1067/222222/888888?text=Lê+Anh+Khoa'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                    <div class="absolute bottom-4 left-4 right-4 text-center">
+                        <span class="text-xs tracking-widest uppercase text-mutedgray" data-i18n="hero_caption"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce hidden sm:block">
+            <a href="#about" class="text-mutedgray hover:text-white text-sm">
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT THE ACTOR -->
+    <section id="about" class="py-24 px-6 border-t border-white/10 bg-darker/50">
+        <div class="max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="about_eyebrow">Tiểu sử</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="about_title">VỀ DIỄN VIÊN</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Intro Statement -->
+                <div class="lg:col-span-7 space-y-6 text-mutedgray text-base md:text-lg leading-relaxed font-light">
+                    <p class="text-white font-medium" data-i18n="about_p1">
+                        "Tôi là một diễn viên trẻ người Việt Nam với niềm đam mê lớn dành cho điện ảnh và truyền hình. Sau khi hoàn thành những khóa học đào tạo diễn xuất, tôi đã phát triển các kỹ năng nền tảng về diễn xuất trước ống kính, phân tích nhân vật và biểu đạt cảm xúc."
+                    </p>
+                    <p data-i18n="about_p2">
+                        Tôi đặc biệt quan tâm đến các dòng phim tâm lý tội phạm, chính kịch, các nhân vật có chiều sâu phức tạp và nghệ thuật kể chuyện giàu cảm xúc. Bên cạnh đó, tôi luôn hướng tới và đặc biệt yêu thích các cơ hội đảm nhận vai diễn trong các dự án hợp tác quốc tế. Mỗi vai diễn là cơ hội để tôi vượt qua giới hạn bản thân, thích ứng linh hoạt với các tiêu chuẩn điện ảnh chuyên nghiệp và mang lại sự chân thực nhất lên màn ảnh.
+                    </p>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="lg:col-span-5 bg-cardbg p-8 rounded-lg border border-white/10 cinematic-shadow space-y-4">
+                    <h3 class="text-xs font-semibold tracking-widest uppercase text-white pb-3 border-b border-white/10 mb-4" data-i18n="specs_title">
+                        Thông số hồ sơ
+                    </h3>
+                    
+                    <div class="grid grid-cols-3 text-sm">
+                        <span class="text-mutedgray font-medium" data-i18n="specs_name_label">Họ tên</span>
+                        <span class="col-span-2 text-white font-semibold">Lê Anh Khoa</span>
+                    </div>
+                    <div class="grid grid-cols-3 text-sm">
+                        <span class="text-mutedgray font-medium" data-i18n="specs_nat_label">Quốc tịch</span>
+                        <span class="col-span-2 text-white" data-i18n="specs_nat_val">Việt Nam</span>
+                    </div>
+                    <div class="grid grid-cols-3 text-sm">
+                        <span class="text-mutedgray font-medium" data-i18n="specs_dob_label">Ngày sinh</span>
+                        <span class="col-span-2 text-white" data-i18n="specs_dob_val">16 Tháng 9, 2006</span>
+                    </div>
+                    <div class="grid grid-cols-3 text-sm">
+                        <span class="text-mutedgray font-medium" data-i18n="specs_base_label">Nơi ở</span>
+                        <span class="col-span-2 text-white" data-i18n="specs_base_val">TP. Hồ Chí Minh, VN</span>
+                    </div>
+                    <div class="grid grid-cols-3 text-sm">
+                        <span class="text-mutedgray font-medium" data-i18n="specs_height_label">Chiều cao</span>
+                        <span class="col-span-2 text-white font-semibold" data-i18n="specs_height_val">1m70</span>
+                    </div>
+                    <div class="grid grid-cols-3 text-sm">
+                        <span class="text-mutedgray font-medium" data-i18n="specs_weight_label">Cân nặng</span>
+                        <span class="col-span-2 text-white font-semibold" data-i18n="specs_weight_val">63 kg</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTOGRAPHY -->
+    <section id="photos" class="py-24 px-6 border-t border-white/10 bg-darker/50">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="photos_eyebrow">Thư viện ảnh</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="photos_title">HỒ SƠ HÌNH ẢNH</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+                <p class="text-mutedgray text-sm mt-4" data-i18n="photos_subtitle">Nhấp vào bất kỳ ảnh nào để xem độ phân giải điện ảnh đầy đủ.</p>
+            </div>
+
+            <!-- Gallery Grid with Real Casting Photos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Photo 1: Direct Front Portrait -->
+                <div class="photo-card group relative aspect-[3/4] bg-cardbg rounded-lg overflow-hidden border border-white/10 cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1dGAB0Y8p5KF-3KclmOqPMtNrnJbowcyI', 'photo_1')">
+                    <img src="https://lh3.googleusercontent.com/d/1dGAB0Y8p5KF-3KclmOqPMtNrnJbowcyI" alt="Chân dung trực diện" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x1067/1a1a1a/888888?text=Chân+dung+trực+diện'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-mutedgray block">01</span>
+                            <h3 class="text-white font-semibold text-lg" data-i18n="photo_1">Chân dung trực diện</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 2: Half Body Expression -->
+                <div class="photo-card group relative aspect-[3/4] bg-cardbg rounded-lg overflow-hidden border border-white/10 cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Ej-QhcBEQvKUNJfPC2aWcGdHj_DlBXFm', 'photo_2')">
+                    <img src="https://lh3.googleusercontent.com/d/1Ej-QhcBEQvKUNJfPC2aWcGdHj_DlBXFm" alt="Nửa người" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x1067/1a1a1a/888888?text=Nửa+người'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-mutedgray block">02</span>
+                            <h3 class="text-white font-semibold text-lg" data-i18n="photo_2">Nửa người & Biểu cảm</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 3: Full Body -->
+                <div class="photo-card group relative aspect-[3/4] bg-cardbg rounded-lg overflow-hidden border border-white/10 cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1c1_wT4Ypq2rmbFBmy_cBV_bmvTD5EbbZ', 'photo_3')">
+                    <img src="https://lh3.googleusercontent.com/d/1c1_wT4Ypq2rmbFBmy_cBV_bmvTD5EbbZ" alt="Toàn thân" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x1067/1a1a1a/888888?text=Toàn+thân'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-mutedgray block">03</span>
+                            <h3 class="text-white font-semibold text-lg" data-i18n="photo_3">Toàn thân</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 4: Side Profile -->
+                <div class="photo-card group relative aspect-[3/4] bg-cardbg rounded-lg overflow-hidden border border-white/10 cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/16ZFU0r9ApSICqFWYukOpEKtJQJsesseG', 'photo_4')">
+                    <img src="https://lh3.googleusercontent.com/d/16ZFU0r9ApSICqFWYukOpEKtJQJsesseG" alt="Góc nghiêng phải" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x1067/1a1a1a/888888?text=Góc+nghiêng+phải'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-mutedgray block">04</span>
+                            <h3 class="text-white font-semibold text-lg" data-i18n="photo_4">Góc nghiêng phải</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 5: Character Portrait I -->
+                <div class="photo-card group relative aspect-[3/4] bg-cardbg rounded-lg overflow-hidden border border-white/10 cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1HlJASg5S9_LUXJhw1ZUjPlKQs0gHllvD', 'photo_5')">
+                    <img src="https://lh3.googleusercontent.com/d/1HlJASg5S9_LUXJhw1ZUjPlKQs0gHllvD" alt="Chân dung nhân vật I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x1067/1a1a1a/888888?text=Chân+dung+nhân+vật+I'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-mutedgray block">05</span>
+                            <h3 class="text-white font-semibold text-lg" data-i18n="photo_5">Chân dung nhân vật I</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 6: Character Portrait II -->
+                <div class="photo-card group relative aspect-[3/4] bg-cardbg rounded-lg overflow-hidden border border-white/10 cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1ygdWEPp-ZakhCPCi9EQALNqfmvmX0TZR', 'photo_6')">
+                    <img src="https://lh3.googleusercontent.com/d/1ygdWEPp-ZakhCPCi9EQALNqfmvmX0TZR" alt="Chân dung nhân vật II" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x1067/1a1a1a/888888?text=Chân+dung+nhân+vật+II'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-mutedgray block">06</span>
+                            <h3 class="text-white font-semibold text-lg" data-i18n="photo_6">Chân dung nhân vật II</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWREEL -->
+    <section id="showreel" class="py-24 px-6 border-t border-white/10">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="showreel_eyebrow">Biểu diễn</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="showreel_title">SHOWREEL DIỄN XUẤT</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+            </div>
+
+            <!-- Showreels Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Vietnamese Showreel Card (Active Google Drive Video Embed) -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-3">
+                            <span class="text-xs tracking-widest font-bold uppercase text-white flex items-center space-x-2">
+                                <span class="text-base leading-none">🇻🇳</span>
+                                <span data-i18n="showreel_title_vi">VIETNAMESE SHOWREEL</span>
+                            </span>
+                        </div>
+                        
+                        <div class="relative w-full aspect-video bg-darker rounded border border-white/10 overflow-hidden">
+                            <iframe 
+                                src="https://drive.google.com/file/d/1Bta-PgWoNqwVcNp1QMFQi_MCOwXsLDsW/preview" 
+                                class="w-full h-full border-0" 
+                                allow="autoplay; encrypted-media; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-mutedgray text-xs mt-4 italic" data-i18n="showreel_caption_vi">
+                        "Các phân cảnh diễn xuất tiếng Việt và biểu diễn cảm xúc."
+                    </p>
+                </div>
+
+                <!-- Korean Showreel Card (Placeholder) -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-3">
+                            <span class="text-xs tracking-widest font-bold uppercase text-white flex items-center space-x-2">
+                                <span class="text-base leading-none">🇰🇷</span>
+                                <span data-i18n="showreel_title_ko">KOREAN SHOWREEL</span>
+                            </span>
+                        </div>
+                        
+                        <div class="relative w-full aspect-video bg-darker rounded border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                            <i class="fa-solid fa-video-slash text-3xl text-mutedgray/40 mb-3"></i>
+                            <span class="text-sm font-semibold tracking-widest uppercase text-mutedgray" data-i18n="status_updating">Đang Cập Nhật</span>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-mutedgray text-xs mt-4 italic" data-i18n="showreel_caption_ko">
+                        "Các phân cảnh diễn xuất tiếng Hàn và biểu diễn phong cách K-Drama."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELF-TAPE SECTION -->
+    <section id="selftape" class="py-24 px-6 border-t border-white/10 bg-darker/50">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="selftape_eyebrow">Thử Vai & Độc Thoại</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="selftape_title">SELF-TAPE AUDITIONS</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+                <p class="text-mutedgray text-sm mt-4 max-w-xl mx-auto" data-i18n="selftape_subtitle">Các đoạn clip tự quay thử vai ngắn, thực hành độc thoại và phân cảnh diễn xuất trực tiếp.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Self-Tape 1 -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-3">
+                            <div>
+                                <span class="text-xs tracking-widest font-bold uppercase text-white block" data-i18n="selftape_1_title">VIETNAMESE SELF-TAPE</span>
+                            </div>
+                            <span class="px-2.5 py-0.5 bg-white/10 text-mutedgray text-[10px] rounded tracking-widest uppercase font-semibold">Self-Tape 01</span>
+                        </div>
+                        <div class="relative w-full aspect-video bg-darker rounded border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                            <i class="fa-solid fa-video-slash text-3xl text-mutedgray/40 mb-3"></i>
+                            <span class="text-sm font-semibold tracking-widest uppercase text-mutedgray" data-i18n="status_updating">Đang Cập Nhật</span>
+                        </div>
+                    </div>
+                    <p class="text-center text-mutedgray text-xs mt-4 italic" data-i18n="selftape_1_desc">
+                        "Đoạn tự quay phân cảnh độc thoại tâm lý điện ảnh."
+                    </p>
+                </div>
+
+                <!-- Self-Tape 2 -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-3">
+                            <div>
+                                <span class="text-xs tracking-widest font-bold uppercase text-white block" data-i18n="selftape_2_title">KOREAN SELF-TAPE</span>
+                            </div>
+                            <span class="px-2.5 py-0.5 bg-white/10 text-mutedgray text-[10px] rounded tracking-widest uppercase font-semibold">Self-Tape 02</span>
+                        </div>
+                        <div class="relative w-full aspect-video bg-darker rounded border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                            <i class="fa-solid fa-video-slash text-3xl text-mutedgray/40 mb-3"></i>
+                            <span class="text-sm font-semibold tracking-widest uppercase text-mutedgray" data-i18n="status_updating">Đang Cập Nhật</span>
+                        </div>
+                    </div>
+                    <p class="text-center text-mutedgray text-xs mt-4 italic" data-i18n="selftape_2_desc">
+                        "Đoạn tự quay diễn xuất đài từ và biểu cảm tiếng Hàn."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS & TRAINING WITH VISUALS -->
+    <section id="skills" class="py-24 px-6 border-t border-white/10 bg-darker/50">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="skills_eyebrow">Năng lực & Đào tạo</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="skills_title">KỸ NĂNG DIỄN XUẤT CHUYÊN NGHIỆP</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+                <p class="text-mutedgray text-sm mt-4" data-i18n="skills_subtitle">Hoàn thành khóa học chuyên sâu với các minh chứng hình ảnh và tài liệu thực hành.</p>
+            </div>
+
+            <!-- Program Overview Banner with Certificate Image on Left & Details on Right -->
+            <div class="bg-cardbg p-5 sm:p-6 rounded-lg border border-white/10 cinematic-shadow mb-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center max-w-4xl mx-auto">
+                <!-- Left: Certificate & Face Graduation Image Container -->
+                <div class="md:col-span-5 relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-white/20 bg-darker group cursor-pointer shadow-lg" onclick="openLightbox('https://lh3.googleusercontent.com/d/1lMEKUjIaed90OnAkzZvUOff1Fybq5APT', 'exp_inst_title')">
+                    <img src="https://lh3.googleusercontent.com/d/1uUcUzjcPBTrkcS8OiF4CbS0JnIOme8aZ" alt="Chứng nhận Diễn xuất chuyên nghiệp" class="w-full h-full object-cover object-[center_35%] group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1e1e1e/888888?text=Chung+Nhan+Dien+Xuat'">
+                </div>
+
+                <!-- Right: Program Details shifted nicely to the right -->
+                <div class="md:col-span-7 space-y-2.5 text-center md:text-left md:pl-4">
+                    <span class="px-2.5 py-0.5 bg-white/15 text-white text-[10px] tracking-widest uppercase rounded-full font-semibold inline-block" data-i18n="exp_completed">Đã hoàn thành</span>
+                    <h3 class="text-xl sm:text-2xl font-bold tracking-wider uppercase text-white" data-i18n="exp_inst_title">DIỄN XUẤT CHUYÊN NGHIỆP</h3>
+                    <p class="text-mutedgray text-xs sm:text-sm leading-relaxed font-light" data-i18n="exp_desc">Chương trình đào tạo diễn xuất chuyên nghiệp toàn diện tập trung vào tiêu chuẩn điện ảnh và truyền hình đương đại, kết hợp thực hành thực tế.</p>
+                </div>
+            </div>
+
+            <!-- Skills Grid with Images -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Skill Card 1: Diễn xuất trước ống kính -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow flex flex-col justify-between group">
+                    <div class="relative aspect-[16/9] overflow-hidden bg-darker cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1UGALHBc9gl-omCkZODCfFnQIyr-65wC7', 'skill_1')">
+                        <img src="https://lh3.googleusercontent.com/d/1UGALHBc9gl-omCkZODCfFnQIyr-65wC7" alt="Diễn xuất trước ống kính" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x450/222222/888888?text=Diễn+xuất+trước+ống+kính'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs tracking-widest uppercase text-mutedgray font-semibold">01</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2" data-i18n="skill_1">Diễn xuất trước ống kính</h4>
+                        <p class="text-xs text-mutedgray leading-relaxed" data-i18n="skill_1_desc">Làm chủ góc máy, kiểm soát biểu cảm gương mặt tinh tế trong khung hình cận cảnh và trung cảnh của điện ảnh.</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2: Phân tích nhân vật & Tâm lý -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow flex flex-col justify-between group">
+                    <div class="relative aspect-[16/9] overflow-hidden bg-darker cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1_JmsxIIPdy7VYyiwGmErie_Z6Ic8iqU8', 'skill_2')">
+                        <img src="https://lh3.googleusercontent.com/d/1_JmsxIIPdy7VYyiwGmErie_Z6Ic8iqU8" alt="Phân tích nhân vật & Tâm lý" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x450/222222/888888?text=Phân+tích+nhân+vật+&+Tâm+lý'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs tracking-widest uppercase text-mutedgray font-semibold">02</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2" data-i18n="skill_2">Phân tích nhân vật & Tâm lý</h4>
+                        <p class="text-xs text-mutedgray leading-relaxed" data-i18n="skill_2_desc">Đào sâu nội tâm nhân vật, thấu hiểu động cơ hành động và xây dựng chiều sâu tâm lý phức tạp qua từng phân cảnh.</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3: Độc thoại & Đài từ -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow flex flex-col justify-between group">
+                    <div class="relative aspect-[16/9] overflow-hidden bg-darker cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1AQbkY7V1DNvR1tBC3Qpfc68VM04_qe_f', 'skill_3')">
+                        <img src="https://lh3.googleusercontent.com/d/1AQbkY7V1DNvR1tBC3Qpfc68VM04_qe_f" alt="Độc thoại & Đài từ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x450/222222/888888?text=Độc+thoại+&+Đài+từ'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs tracking-widest uppercase text-mutedgray font-semibold">03</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2" data-i18n="skill_3">Độc thoại & Đài từ</h4>
+                        <p class="text-xs text-mutedgray leading-relaxed" data-i18n="skill_3_desc">Kiểm soát nhịp điệu phát âm, ngữ điệu giọng nói và truyền tải cảm xúc trọn vẹn trong các đoạn độc thoại nội tâm.</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4: Biểu đạt cảm xúc & Ứng biến -->
+                <div class="bg-cardbg rounded-lg border border-white/10 overflow-hidden cinematic-shadow flex flex-col justify-between group">
+                    <div class="relative aspect-[16/9] overflow-hidden bg-darker cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/d/1fhzlQLJ_ZEST6-JApb27mHrOkyDM-N2c', 'skill_4')">
+                        <img src="https://lh3.googleusercontent.com/d/1fhzlQLJ_ZEST6-JApb27mHrOkyDM-N2c" alt="Biểu đạt cảm xúc & Ứng biến" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x450/222222/888888?text=Biểu+đạt+cảm+xúc+&+Ứng+biến'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs tracking-widest uppercase text-mutedgray font-semibold">04</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2" data-i18n="skill_4">Biểu đạt cảm xúc & Ứng biến</h4>
+                        <p class="text-xs text-mutedgray leading-relaxed" data-i18n="skill_4_desc">Kỹ thuật hồi tưởng cảm xúc, bộc lộ trạng thái tâm lý chân thực và phản ứng linh hoạt trong các tình huống ứng biến.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Languages Section Below Skills -->
+            <div class="mt-12 bg-cardbg p-8 rounded-lg border border-white/10 cinematic-shadow">
+                <h3 class="text-sm font-bold uppercase tracking-widest text-white pb-4 border-b border-white/10 flex items-center justify-between mb-6">
+                    <span data-i18n="languages_title">Ngôn ngữ</span>
+                    <i class="fa-solid fa-globe text-mutedgray"></i>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <div class="flex justify-between text-xs tracking-widest uppercase mb-2">
+                            <span class="text-white font-medium" data-i18n="lang_vi">Tiếng Việt</span>
+                            <span class="text-mutedgray font-semibold" data-i18n="lang_native">Bản ngữ</span>
+                        </div>
+                        <div class="w-full bg-darker h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-white h-full w-[100%]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs tracking-widest uppercase mb-2">
+                            <span class="text-white font-medium" data-i18n="lang_ko">Tiếng Hàn</span>
+                            <span class="text-mutedgray font-semibold" data-i18n="lang_learning">Đang học</span>
+                        </div>
+                        <div class="w-full bg-darker h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-white/60 h-full w-[45%]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs tracking-widest uppercase mb-2">
+                            <span class="text-white font-medium" data-i18n="lang_en">Tiếng Anh</span>
+                            <span class="text-mutedgray font-semibold" data-i18n="lang_learning">Đang học</span>
+                        </div>
+                        <div class="w-full bg-darker h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-white/80 h-full w-[50%]"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-6 mt-6 border-t border-white/5 text-xs text-mutedgray/70 italic text-center" data-i18n="lang_footer_note">
+                    Sẵn sàng thể hiện vai diễn đa ngôn ngữ
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT EXPERIENCE & CREDITS -->
+    <section id="experience" class="py-24 px-6 border-t border-white/10">
+        <div class="max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="exp_eyebrow">Thành tích</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="exp_title">KINH NGHIỆM DỰ ÁN</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+            </div>
+
+            <!-- Film Credits / Projects Area -->
+            <div class="bg-cardbg p-8 md:p-12 rounded-lg border border-white/10 cinematic-shadow space-y-8 max-w-4xl mx-auto">
+                <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                    <div>
+                        <span class="text-xs tracking-widest uppercase text-mutedgray" data-i18n="cred_label">Phim ảnh & Quảng cáo</span>
+                        <h3 class="text-2xl font-bold uppercase tracking-wider text-white mt-1" data-i18n="cred_title">Tín chỉ & Dự án</h3>
+                    </div>
+                    <span class="px-3.5 py-1.5 bg-white/5 text-mutedgray text-xs rounded-full font-medium tracking-wider uppercase border border-white/10" data-i18n="cred_upcoming">Sắp ra mắt</span>
+                </div>
+                <p class="text-mutedgray text-sm md:text-base leading-relaxed" data-i18n="cred_desc">
+                    Khu vực chuyên biệt dành cho các dự án phim điện ảnh, phim ngắn, phim truyền hình và quảng cáo thương mại trong tương lai.
+                </p>
+
+                <div class="p-10 bg-darker rounded-lg border border-white/5 text-center my-6">
+                    <i class="fa-solid fa-user-secret text-4xl text-mutedgray/40 mb-4 animate-pulse"></i>
+                    <p class="text-sm font-semibold tracking-widest uppercase text-white" data-i18n="cred_empty">Một số dự án chưa được công bố.</p>
+                    <p class="text-xs text-mutedgray mt-2" data-i18n="cred_subempty">Sẵn sàng nhận lời mời casting và các sản phẩm sắp tới.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 px-6 border-t border-white/10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-mega uppercase text-mutedgray block mb-3" data-i18n="contact_eyebrow">Liên hệ</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wider uppercase" data-i18n="contact_title">LIÊN HỆ TRỰC TIẾP</h2>
+                <div class="w-12 h-0.5 bg-white mx-auto mt-4"></div>
+                <p class="text-mutedgray text-sm mt-4" data-i18n="contact_subtitle">Dành cho cơ hội casting, buổi thử vai và đại diện chuyên nghiệp.</p>
+            </div>
+
+            <!-- Single Centered Contact Card -->
+            <div class="max-w-xl mx-auto mb-16">
+                <div class="bg-cardbg p-8 sm:p-10 rounded-lg border border-white/10 cinematic-shadow space-y-6">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-white pb-3 border-b border-white/10 text-center" data-i18n="direct_contacts">
+                        Thông tin liên hệ
+                    </h3>
+                    
+                    <div class="space-y-6 text-sm pt-2">
+                        <!-- Email -->
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded bg-darker flex items-center justify-center text-mutedgray shrink-0">
+                                <i class="fa-solid fa-envelope text-lg"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="text-xs tracking-widest uppercase text-mutedgray block">Email</span>
+                                <a href="mailto:leanhkhoa1609@gmail.com" class="text-white hover:text-mutedgray font-medium transition-colors text-left break-all inline-block">
+                                    leanhkhoa1609@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- TikTok -->
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded bg-darker flex items-center justify-center text-mutedgray shrink-0">
+                                <i class="fa-brands fa-tiktok text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs tracking-widest uppercase text-mutedgray block">TikTok</span>
+                                <a href="https://tiktok.com/@leanhkhoa.169" target="_blank" rel="noopener noreferrer" class="text-white hover:text-mutedgray font-medium transition-colors">
+                                    @leanhkhoa.169
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Facebook -->
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded bg-darker flex items-center justify-center text-mutedgray shrink-0">
+                                <i class="fa-brands fa-facebook text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs tracking-widest uppercase text-mutedgray block">Facebook</span>
+                                <a href="https://www.facebook.com/leanhkhoa6" target="_blank" rel="noopener noreferrer" class="text-white hover:text-mutedgray font-medium transition-colors">
+                                    facebook.com/leanhkhoa6
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded bg-darker flex items-center justify-center text-mutedgray shrink-0">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs tracking-widest uppercase text-mutedgray block" data-i18n="loc_label">Địa điểm</span>
+                                <span class="text-white font-medium" data-i18n="loc_val">Ho Chi Minh City, Vietnam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing Typography -->
+            <div class="text-center pt-8 border-t border-white/10">
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-mega uppercase text-white/90" data-i18n="closing_quote">
+                    "HÃY CÙNG NHAU HỢP TÁC."
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-6 border-t border-white/10 bg-darker text-center">
+        <div class="max-w-7xl mx-auto space-y-4">
+            <h4 class="text-sm font-bold tracking-widest uppercase">LÊ ANH KHOA</h4>
+            <p class="text-xs tracking-mega uppercase text-mutedgray" data-i18n="footer_subtitle">ACTOR PORTFOLIO</p>
+            <p class="text-xs text-mutedgray/60 pt-4" data-i18n="footer_copy">Copyright Lê Anh Khoa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-2xl hover:text-mutedgray p-2 focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl max-h-[85vh] flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Lightbox Preview" class="max-h-[75vh] max-w-full object-contain rounded border border-white/10 cinematic-shadow">
+            <p id="lightbox-caption" class="text-xs tracking-widest uppercase text-mutedgray mt-4"></p>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-white text-black px-6 py-3 rounded shadow-2xl text-xs font-semibold tracking-wider uppercase transform translate-y-20 opacity-0 transition-all duration-300">
+        <span id="toast-text">Đã sao chép email vào bộ nhớ tạm</span>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Multi-Language Translations Dictionary
+        const translations = {
+            vi: {
+                nav_home: "TRANG CHỦ",
+                nav_about: "Giới thiệu",
+                nav_flexibility: "Thích ứng",
+                nav_photos: "Ảnh",
+                nav_showreel: "Showreel",
+                nav_selftape: "Self-Tape",
+                nav_experience: "Dự án",
+                nav_skills: "Kỹ năng",
+                nav_contact: "Liên hệ",
+                hero_badge: "Hồ sơ Năng Lực Diễn Viên",
+                hero_subtitle: "DIỄN VIÊN · VIỆT NAM",
+                hero_tagline: "\"Khám phá nhân vật. Kể chuyện.\"",
+                hero_btn_showreel: "Xem Showreel",
+                hero_btn_contact: "Liên hệ ngay",
+                about_eyebrow: "Tiểu sử",
+                about_title: "VỀ DIỄN VIÊN",
+                about_p1: "\"Tôi là một diễn viên trẻ người Việt Nam với niềm đam mê lớn dành cho điện ảnh và truyền hình. Sau khi hoàn thành những khóa học đào tạo diễn xuất, tôi đã phát triển các kỹ năng nền tảng về diễn xuất trước ống kính, phân tích nhân vật và biểu đạt cảm xúc.\"",
+                about_p2: "Tôi đặc biệt quan tâm đến các dòng phim tâm lý tội phạm, chính kịch, các nhân vật có chiều sâu phức tạp và nghệ thuật kể chuyện giàu cảm xúc. Bên cạnh đó, tôi luôn hướng tới và đặc biệt yêu thích các cơ hội đảm nhận vai diễn trong các dự án hợp tác quốc tế. Mỗi vai diễn là cơ hội để tôi vượt qua giới hạn bản thân, thích ứng linh hoạt với các tiêu chuẩn điện ảnh chuyên nghiệp và mang lại sự chân thực nhất lên màn ảnh.",
+                specs_title: "Thông số hồ sơ",
+                specs_name_label: "Họ tên",
+                specs_nat_label: "Quốc tịch",
+                specs_nat_val: "Việt Nam",
+                specs_dob_label: "Ngày sinh",
+                specs_dob_val: "16 Tháng 9, 2006",
+                specs_base_label: "Nơi ở",
+                specs_base_val: "TP. Hồ Chí Minh, VN",
+                specs_height_label: "Chiều cao",
+                specs_height_val: "1m70",
+                specs_weight_label: "Cân nặng",
+                specs_weight_val: "63 kg",
+                flex_eyebrow: "Thích ứng & Tạo hình",
+                flex_title: "KHẢ NĂNG THÍCH ỨNG & TẠO HÌNH",
+                flex_subtitle: "Thông tin về khả năng linh hoạt tạo hình nhân vật và cam kết với yêu cầu kịch bản.",
+                flex_item_hair: "Thay đổi tạo hình & Kiểu tóc",
+                flex_item_hair_desc: "Linh hoạt nhuộm màu, cắt tóc ngắn hoặc điều chỉnh tạo hình nhân vật theo yêu cầu của đạo diễn.",
+                flex_item_skills: "Học thêm ngôn ngữ & Kỹ năng mới",
+                flex_item_skills_desc: "Tiếp thu nhanh ngoại ngữ, khẩu âm đặc trưng và kỹ năng biểu diễn đặc thù dành riêng cho từng vai diễn.",
+                flex_item_travel: "Đi quay xa & Ngoại tỉnh / Nước ngoài",
+                flex_item_travel_desc: "Chủ động thời gian, sẵn sàng di chuyển theo đoàn quay xa nhà dài ngày theo tiến độ sản xuất.",
+                flex_item_physical: "Biến đổi hình thể & Thích ứng bối cảnh",
+                flex_item_physical_desc: "Điều chỉnh cân nặng (tăng/giảm cơ) và đáp ứng các cảnh quay điều kiện thời tiết khắc nghiệt (quay đêm, mưa, nắng).",
+                photos_eyebrow: "Thư viện ảnh",
+                photos_title: "HỒ SƠ HÌNH ẢNH",
+                photos_subtitle: "Nhấp vào bất kỳ ảnh nào để xem độ phân giải điện ảnh đầy đủ.",
+                photo_1: "Chân dung trực diện",
+                photo_2: "Nửa người & Biểu cảm",
+                photo_3: "Toàn thân",
+                photo_4: "Góc nghiêng phải",
+                photo_5: "Chân dung nhân vật I",
+                photo_6: "Chân dung nhân vật II",
+                showreel_eyebrow: "Biểu diễn",
+                showreel_title: "SHOWREEL DIỄN XUẤT",
+                showreel_title_vi: "VIETNAMESE SHOWREEL",
+                showreel_title_ko: "KOREAN SHOWREEL",
+                showreel_caption_vi: "\"Các phân cảnh diễn xuất tiếng Việt và biểu diễn cảm xúc.\"",
+                showreel_caption_ko: "\"Các phân cảnh diễn xuất tiếng Hàn và biểu diễn phong cách K-Drama.\"", 
+                selftape_eyebrow: "Thử Vai & Độc Thoại",
+                selftape_title: "SELF-TAPE AUDITIONS",
+                selftape_subtitle: "Các đoạn clip tự quay thử vai ngắn, thực hành độc thoại và phân cảnh diễn xuất trực tiếp.",
+                selftape_1_title: "VIETNAMESE SELF-TAPE",
+                selftape_1_desc: "\"Đoạn tự quay phân cảnh độc thoại tâm lý điện ảnh.\"",
+                selftape_2_title: "KOREAN SELF-TAPE",
+                selftape_2_desc: "\"Đoạn tự quay diễn xuất đài từ và biểu cảm tiếng Hàn.\"",
+                status_updating: "Đang Cập Nhật",
+                exp_eyebrow: "Thành tích",
+                exp_title: "KINH NGHIỆM DỰ ÁN",
+                exp_inst_label: "Chương trình",
+                exp_inst_title: "DIỄN XUẤT CHUYÊN NGHIỆP",
+                exp_completed: "Đã hoàn thành",
+                exp_desc: "Chương trình đào tạo diễn xuất chuyên nghiệp toàn diện tập trung vào tiêu chuẩn điện ảnh và truyền hình đương đại, kết hợp thực hành thực tế.",
+                btn_view_drive: "Xem Drive",
+                drive_link_label: "Tài liệu thực hành chuyên sâu",
+                skill_1: "Diễn xuất trước ống kính",
+                skill_1_desc: "Làm chủ góc máy, kiểm soát biểu cảm gương mặt tinh tế trong khung hình cận cảnh và trung cảnh của điện ảnh.",
+                skill_2: "Phân tích nhân vật & Tâm lý",
+                skill_2_desc: "Đào sâu nội tâm nhân vật, thấu hiểu động cơ hành động và xây dựng chiều sâu tâm lý phức tạp qua từng phân cảnh.",
+                skill_3: "Độc thoại & Đài từ",
+                skill_3_desc: "Kiểm soát nhịp điệu phát âm, ngữ điệu giọng nói và truyền tải cảm xúc trọn vẹn trong các đoạn độc thoại nội tâm.",
+                skill_4: "Biểu đạt cảm xúc & Ứng biến",
+                skill_4_desc: "Kỹ thuật hồi tưởng cảm xúc, bộc lộ trạng thái tâm lý chân thực và phản ứng linh hoạt trong các tình huống ứng biến.",
+                cred_label: "Phim ảnh & Quảng cáo",
+                cred_title: "Tín chỉ & Dự án",
+                cred_upcoming: "Sắp ra mắt",
+                cred_desc: "Khu vực chuyên biệt dành cho các dự án phim điện ảnh, phim ngắn, phim truyền hình và quảng cáo thương mại trong tương lai.",
+                cred_empty: "Một số dự án chưa được công bố.",
+                cred_subempty: "Sẵn sàng nhận lời mời casting và các sản phẩm sắp tới.",
+                skills_eyebrow: "Năng lực & Đào tạo",
+                skills_title: "KỸ NĂNG DIỄN XUẤT CHUYÊN NGHIỆP",
+                skills_subtitle: "Hoàn thành khóa học chuyên sâu với các minh chứng hình ảnh và tài liệu thực hành.",
+                acting_skills_title: "Kỹ năng diễn xuất",
+                level_advanced: "Nâng cao",
+                level_proficient: "Thành thạo",
+                languages_title: "Ngôn ngữ",
+                lang_vi: "Tiếng Việt",
+                lang_native: "Bản ngữ",
+                lang_ko: "Tiếng Hàn",
+                lang_en: "Tiếng Anh",
+                lang_learning: "Đang học",
+                lang_footer_note: "Sẵn sàng thể hiện vai diễn đa ngôn ngữ",
+                contact_eyebrow: "Liên hệ",
+                contact_title: "LIÊN HỆ TRỰC TIẾP",
+                contact_subtitle: "Dành cho cơ hội casting, buổi thử vai và đại diện chuyên nghiệp.",
+                direct_contacts: "Thông tin liên hệ",
+                loc_label: "Địa điểm",
+                loc_val: "Ho Chi Minh City, Vietnam",
+                closing_quote: "\"HÃY CÙNG NHAU HỢP TÁC.\"",
+                footer_subtitle: "ACTOR PORTFOLIO",
+                footer_copy: "Copyright Lê Anh Khoa. All rights reserved."
+            },
+            en: {
+                nav_home: "HOME",
+                nav_about: "About",
+                nav_flexibility: "Adaptability",
+                nav_photos: "Photos",
+                nav_showreel: "Showreel",
+                nav_selftape: "Self-Tape",
+                nav_experience: "Projects",
+                nav_skills: "Skills",
+                nav_contact: "Contact",
+                hero_badge: "Official Actor Profile",
+                hero_subtitle: "ACTOR · VIETNAM",
+                hero_tagline: "\"Exploring characters. Telling stories.\"",
+                hero_btn_showreel: "Watch Showreel",
+                hero_btn_contact: "Get in Touch",
+                about_eyebrow: "Biography",
+                about_title: "ABOUT THE ACTOR",
+                about_p1: "\"I am an aspiring Vietnamese actor with a strong interest in film and television. Having completed acting training, I have developed foundational skills in on-camera acting, character analysis and emotional expression.\"",
+                about_p2: "I am particularly passionate about psychological thrillers, dramas, complex characters, and emotionally compelling storytelling. In addition, I am highly interested in and actively pursuing opportunities for international roles and cross-border co-productions. Every performance is a chance to push personal boundaries, seamlessly adapt to professional cinematic standards, and bring genuine authenticity to the screen.",
+                specs_title: "Actor Specifications",
+                specs_name_label: "Full Name",
+                specs_nat_label: "Nationality",
+                specs_nat_val: "Vietnamese",
+                specs_dob_label: "Date of Birth",
+                specs_dob_val: "September 16, 2006",
+                specs_base_label: "Based in",
+                specs_base_val: "Ho Chi Minh City, VN",
+                specs_height_label: "Height",
+                specs_height_val: "170 cm (1m70)",
+                specs_weight_label: "Weight",
+                specs_weight_val: "63 kg",
+                flex_eyebrow: "Adaptability & Styling",
+                flex_title: "ADAPTABILITY & LOOK TRANSFORMATION",
+                flex_subtitle: "Information regarding physical adaptability and commitment to script requirements.",
+                flex_item_hair: "Hairstyle & Image Transformation",
+                flex_item_hair_desc: "Flexible with hair dyeing, short haircuts, or image adjustments per director's requirements.",
+                flex_item_skills: "New Languages & Special Skills",
+                flex_item_skills_desc: "Fast learner of new languages, accents, and specialized performance skills for roles.",
+                flex_item_travel: "On-Location & International Travel",
+                flex_item_travel_desc: "Fully flexible schedule for long-distance domestic and international filming locations.",
+                flex_item_physical: "Physical Transformation & Harsh Conditions",
+                flex_item_physical_desc: "Committed to body weight adjustments and adapting to demanding filming conditions (night, rain, heat).",
+                photos_eyebrow: "Gallery",
+                photos_title: "PHOTO PORTFOLIO",
+                photos_subtitle: "Click any photo to view in full cinematic resolution.",
+                photo_1: "Direct Front Portrait",
+                photo_2: "Half Body & Expression",
+                photo_3: "Full Body",
+                photo_4: "Right Side Profile",
+                photo_5: "Character Portrait I",
+                photo_6: "Character Portrait II",
+                showreel_eyebrow: "Performance",
+                showreel_title: "ACTING SHOWREEL",
+                showreel_title_vi: "VIETNAMESE SHOWREEL",
+                showreel_title_ko: "KOREAN SHOWREEL",
+                showreel_caption_vi: "\"Vietnamese acting scenes and performance highlights.\"",
+                showreel_caption_ko: "\"Korean acting scenes and K-Drama style performances.\"",
+                selftape_eyebrow: "Audition & Monologues",
+                selftape_title: "SELF-TAPE AUDITIONS",
+                selftape_subtitle: "Short self-taped audition clips, monologue practices, and live acting scenes.",
+                selftape_1_title: "VIETNAMESE SELF-TAPE",
+                selftape_1_desc: "\"Self-taped dramatic monologue scene.\"",
+                selftape_2_title: "KOREAN SELF-TAPE",
+                selftape_2_desc: "\"Self-taped Korean dialogue and emotional expression.\"",
+                status_updating: "Updating",
+                exp_eyebrow: "Achievements",
+                exp_title: "PROJECT EXPERIENCE",
+                exp_inst_label: "Program",
+                exp_inst_title: "PROFESSIONAL ACTING",
+                exp_completed: "Completed",
+                exp_desc: "Comprehensive professional acting training program focusing on contemporary film and television standards, combined with practical execution.",
+                drive_link_label: "In-depth practice materials",
+                skill_1: "On-camera Performance",
+                skill_1_desc: "Mastering camera angles and refined facial expressions in cinematic close-ups and medium shots.",
+                skill_2: "Character Analysis & Psychology",
+                skill_2_desc: "Deep character immersion, understanding action motives and building complex psychological depth.",
+                skill_3: "Monologue & Diction",
+                skill_3_desc: "Controlling vocal pacing, intonation, and delivering full emotional impact in internal monologues.",
+                skill_4: "Emotional Expression & Improvisation",
+                skill_4_desc: "Emotional recall techniques, authentic psychological state expression, and flexible improvisation.",
+                cred_label: "Film & Commercials",
+                cred_title: "Credits & Projects",
+                cred_upcoming: "Upcoming",
+                cred_desc: "Dedicated area for future feature films, short films, television series and commercial projects.",
+                cred_empty: "Some unannounced projects.",
+                cred_subempty: "Open to casting calls and upcoming productions.",
+                skills_eyebrow: "Competence & Training",
+                skills_title: "PROFESSIONAL ACTING SKILLS",
+                skills_subtitle: "Completed intensive training with visual proofs and practice materials.",
+                acting_skills_title: "Acting Skills",
+                level_advanced: "Advanced",
+                level_proficient: "Proficient",
+                languages_title: "Languages",
+                lang_vi: "Vietnamese",
+                lang_native: "Native",
+                lang_ko: "Korean",
+                lang_en: "English",
+                lang_learning: "Learning",
+                lang_footer_note: "Ready for multilingual roles and performances",
+                contact_eyebrow: "Contact",
+                contact_title: "GET IN TOUCH",
+                contact_subtitle: "Available for casting opportunities, auditions and professional representation.",
+                direct_contacts: "Direct Contacts",
+                loc_label: "Location",
+                loc_val: "Ho Chi Minh City, Vietnam",
+                closing_quote: "\"LET'S WORK TOGETHER.\"",
+                footer_subtitle: "ACTOR PORTFOLIO",
+                footer_copy: "Copyright Lê Anh Khoa. All rights reserved."
+            },
+            ko: {
+                nav_home: "홈",
+                nav_about: "소개",
+                nav_flexibility: "적응력",
+                nav_photos: "포토",
+                nav_showreel: "쇼릴",
+                nav_selftape: "셀프테이프",
+                nav_experience: "프로젝트",
+                nav_skills: "특기",
+                nav_contact: "연락처",
+                hero_badge: "공식 배우 프로필",
+                hero_subtitle: "배우 · 베트남",
+                hero_tagline: "\"캐릭터를 탐구하고 이야기를 전합니다.\"",
+                hero_btn_showreel: "쇼릴 재생",
+                hero_btn_contact: "연락하기",
+                about_eyebrow: "바이오그래피",
+                about_title: "배우 소개",
+                about_p1: "\"저는 영화와 TV에 대한 깊은 열정을 가진 베트남의 신예 배우입니다. 연기 훈련을 마치고 카메라 연기, 캐릭터 분석 및 감정 표현에 대한 기초 역량을 다졌습니다.\"",
+                about_p2: "특히 범죄 스릴러, 정극, 복합적인 내면을 가진 캐릭터와 감성적인 스토리텔링에 큰 흥미를 가지고 있습니다. 아울러 글로벌 프로젝트 및 글로벌 배역 도전에도 깊은 관심과 열정을 가지고 있습니다. 모든 배역은 한계에 도전하고 전문적인 영화적 기준에 유연하게 적응하며 스크린에 진정성을 불어넣는 기회입니다.",
+                specs_title: "배우 프로필 정보",
+                specs_name_label: "이름",
+                specs_nat_label: "국적",
+                specs_nat_val: "베트남",
+                specs_dob_label: "생년월일",
+                specs_dob_val: "2006년 9월 16일",
+                specs_base_label: "활동 지역",
+                specs_base_val: "베트남 호치민시",
+                specs_height_label: "키",
+                specs_height_val: "170 cm",
+                specs_weight_label: "몸무게",
+                specs_weight_val: "63 kg",
+                flex_eyebrow: "적응력 및 스타일링",
+                flex_title: "적응력 및 캐릭터 스타일링",
+                flex_subtitle: "대본 요구 사항에 따른 외형 변화 유연성 및 촬영 현장 적응력 정보입니다.",
+                flex_item_hair: "헤어 스타일 및 이미지 변신",
+                flex_item_hair_desc: "연출 의도에 맞춰 헤어 염색, 컷트 및 캐릭터 스타일링 변형이 가능합니다.",
+                flex_item_skills: "새로운 언어 및 특기 습득",
+                flex_item_skills_desc: "배역에 필요한 외국어, 억양 및 특수 연기 기술의 빠른 습득이 가능합니다.",
+                flex_item_travel: "지방 촬영 및 해외 로케이션",
+                flex_item_travel_desc: "장기 지방 촬영 및 해외 로케이션 스케줄을 유연하게 소화할 수 있습니다.",
+                flex_item_physical: "신체 변화 및 현장 적응",
+                flex_item_physical_desc: "체중 증감 조절 및 야간/우중 등 다양한 촬영 환경에 적극 적응합니다.",
+                photos_eyebrow: "갤러리",
+                photos_title: "사진 포트폴리오",
+                photos_subtitle: "사진을 클릭하시면 고화질 시네마틱 뷰로 보실 수 있습니다.",
+                photo_1: "정면 프로필",
+                photo_2: "반신 및 표정",
+                photo_3: "전신",
+                photo_4: "우측 측면",
+                photo_5: "캐릭터 포트레이트 I",
+                photo_6: "캐릭터 포트레이트 II",
+                showreel_eyebrow: "퍼포먼스",
+                showreel_title: "연기 쇼릴",
+                showreel_title_vi: "VIETNAMESE SHOWREEL",
+                showreel_title_ko: "KOREAN SHOWREEL",
+                showreel_caption_vi: "\"베트남어 연기 장면 및 퍼포먼스.\"",
+                showreel_caption_ko: "\"한국어 연기 장면 및 K-드라마 스타일 퍼포먼스.\"",
+                selftape_eyebrow: "오디션 & 독백",
+                selftape_title: "SELF-TAPE AUDITIONS",
+                selftape_subtitle: "셀프 테이프 오디션 클립, 독백 연습 및 즉흥 연기 영상.",
+                selftape_1_title: "VIETNAMESE SELF-TAPE",
+                selftape_1_desc: "\"셀프 테이프 드라마 독백 장면.\"",
+                selftape_2_title: "KOREAN SELF-TAPE",
+                selftape_2_desc: "\"한국어 대사 및 감정 표현 셀프 테이프.\"",
+                status_updating: "업데이트 중",
+                exp_eyebrow: "성과",
+                exp_title: "프로젝트 경력",
+                exp_inst_label: "프로그램",
+                exp_inst_title: "전문 연기",
+                exp_completed: "수료 완료",
+                exp_desc: "현대 영화 및 TV 표준에 맞춘 전문적이고 체계적인 배우 연기 훈련 프로그램이며, 실전 실습을 병행합니다.",
+                drive_link_label: "심화 실습 자료",
+                skill_1: "카메라 연기",
+                skill_1_desc: "시네마틱 클로즈업과 미디엄 샷에서 카메라 앵글을 마스터하고 세밀한 표정을 제어합니다.",
+                skill_2: "캐릭터 분석 및 심리",
+                skill_2_desc: "캐릭터 내면에 깊이 몰입하고 동기를 이해하며 복잡한 심리적 깊이를 구축합니다.",
+                skill_3: "독백 및 발성",
+                skill_3_desc: "내면 독백에서 발성 속도와 억양을 조절하고 감정을 완벽하게 전달합니다.",
+                skill_4: "감정 표현 및 즉흥 연기",
+                skill_4_desc: "감정 회상 기법, 진정성 있는 심리 상태 표현 및 유연한 즉흥 연기 역량.",
+                cred_label: "필모그래피 & 광고",
+                cred_title: "크레딧 및 프로젝트",
+                cred_upcoming: "예정",
+                cred_desc: "향후 장편 영화, 단편 영화, 드라마 및 광고 프로젝트를 위한 전용 공간입니다.",
+                cred_empty: "미공개 프로젝트 진행 중.",
+                cred_subempty: "향후 제작 예정인 작품의 연락을 기다립니다.",
+                skills_eyebrow: "역량 & 훈련",
+                skills_title: "전문 연기 스킬",
+                skills_subtitle: "시각적 증빙 자료와 실습 자료가 포함된 심화 과정을 수료했습니다.",
+                acting_skills_title: "연기 특기",
+                level_advanced: "상급",
+                level_proficient: "숙련됨",
+                languages_title: "언어",
+                lang_vi: "베트남어",
+                lang_native: "모국어",
+                lang_ko: "한국어",
+                lang_en: "영어",
+                lang_learning: "학습 중",
+                lang_footer_note: "다국어 배역 및 연기 소화 가능",
+                contact_eyebrow: "연락처",
+                contact_title: "직접 연락",
+                contact_subtitle: "캐스팅 기회, 오디션 및 전문 매니지먼트 문의를 환영합니다.",
+                direct_contacts: "연락처 정보",
+                loc_label: "위치",
+                loc_val: "베트남 호치민시",
+                closing_quote: "\"함께 협력합시다.\"",
+                footer_subtitle: "ACTOR PORTFOLIO",
+                footer_copy: "Copyright Lê Anh Khoa. All rights reserved."
+            }
+        };
+
+        const flags = {
+            vi: '🇻🇳',
+            en: '🇬🇧',
+            ko: '🇰🇷'
+        };
+
+        // Mobile Navigation Menu Toggle Handler
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Auto-close drawer when clicking links
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Toggle Desktop Dropdown
+        function toggleLangDropdown() {
+            const menu = document.getElementById('lang-menu');
+            const arrow = document.getElementById('lang-arrow');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                if (arrow) {
+                    arrow.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            }
+        }
+
+        // Toggle Mobile Dropdown
+        function toggleMobileLangDropdown() {
+            const menu = document.getElementById('m-lang-menu');
+            const arrow = document.getElementById('m-lang-arrow');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                if (arrow) {
+                    arrow.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            }
+        }
+
+        // Close dropdowns & menus when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('#lang-dropdown-btn') && !e.target.closest('#lang-menu')) {
+                const menu = document.getElementById('lang-menu');
+                const arrow = document.getElementById('lang-arrow');
+                if (menu) menu.classList.add('hidden');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            }
+            if (!e.target.closest('#m-lang-dropdown-btn') && !e.target.closest('#m-lang-menu')) {
+                const mMenu = document.getElementById('m-lang-menu');
+                const mArrow = document.getElementById('m-lang-arrow');
+                if (mMenu) mMenu.classList.add('hidden');
+                if (mArrow) mArrow.style.transform = 'rotate(0deg)';
+            }
+            if (!e.target.closest('#mobile-menu-btn') && !e.target.closest('#mobile-menu')) {
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+
+        let currentLang = 'vi';
+
+        // Language Switcher Function
+        function changeLanguage(lang) {
+            currentLang = lang;
+            // Update all elements with data-i18n attribute
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Update caption in lightbox if opened
+            const caption = document.getElementById('lightbox-caption');
+            if (caption && caption.getAttribute('data-i18n-key')) {
+                const key = caption.getAttribute('data-i18n-key');
+                if (translations[lang] && translations[lang][key]) {
+                    caption.textContent = translations[lang][key];
+                }
+            }
+
+            const flagEmoji = flags[lang];
+            const langUpper = lang.toUpperCase();
+
+            // Update Desktop UI
+            const currentFlagEl = document.getElementById('current-flag');
+            const currentTextEl = document.getElementById('current-lang-text');
+            if (currentFlagEl) currentFlagEl.textContent = flagEmoji;
+            if (currentTextEl) currentTextEl.textContent = langUpper;
+
+            // Update Mobile UI
+            const mCurrentFlagEl = document.getElementById('m-current-flag');
+            const mCurrentTextEl = document.getElementById('m-current-lang-text');
+            if (mCurrentFlagEl) mCurrentFlagEl.textContent = flagEmoji;
+            if (mCurrentTextEl) mCurrentTextEl.textContent = langUpper;
+
+            // Hide menus after selection
+            const menu = document.getElementById('lang-menu');
+            const arrow = document.getElementById('lang-arrow');
+            if (menu) menu.classList.add('hidden');
+            if (arrow) arrow.style.transform = 'rotate(0deg)';
+
+            const mMenu = document.getElementById('m-lang-menu');
+            const mArrow = document.getElementById('m-lang-arrow');
+            if (mMenu) mMenu.classList.add('hidden');
+            if (mArrow) mArrow.style.transform = 'rotate(0deg)';
+
+            // Update document lang attribute
+            document.documentElement.setAttribute('lang', lang);
+        }
+
+        // Lightbox Functions
+        function openLightbox(imgSrc, photoKey) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            
+            if (!modal || !img || !caption) return;
+            img.src = imgSrc;
+            caption.setAttribute('data-i18n-key', photoKey);
+            if (translations[currentLang] && translations[currentLang][photoKey]) {
+                caption.textContent = translations[currentLang][photoKey];
+            } else {
+                caption.textContent = photoKey;
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close Modals on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            if (!toast || !toastText) return;
+            toastText.textContent = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
